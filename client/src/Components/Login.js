@@ -2,13 +2,9 @@ import React, { useState } from 'react'
 // import { NavLink } from 'react-router-dom'
 import LoginNavbar from './LoginNavbar'
 import { useNavigate } from 'react-router-dom'
-
 export default function Login() {
 
-
-
-    const navigate = useNavigate();
-
+  const navigate = useNavigate();
     const [inpval, setINP] = useState({
         email: "",
         pass: "",
@@ -21,18 +17,16 @@ export default function Login() {
         console.log(e.target.value)
 
         const { name, value } = e.target;
-        console.log("setting", name, "to", value)
+        // console.log("setting", name, "to", value)
         setINP((preval) => {
             return {
                 ...preval, [name]: value
             }
         })
     }
-
     const addinpdata = async (e) => {
         e.preventDefault();
         const { email,
-
             pass, } = inpval;
         const res = await fetch("/login",
             {
@@ -46,24 +40,19 @@ export default function Login() {
                 })
             })
 
-        if (res.status === 200) {
+
+            const token = await res.json();
+            console.log(token);
+
+        if (res.status === 200 ) {
             navigate("/home")
             alert(" Login success.....  Welcome to our App")
+            console.log("login")
+            console.log(token)
         } else {
             alert("Login fail  please enter registred email-id and password")
+         
         }
-
-
-        const data = await res.json();
-        console.log(data);
-        if (res.status === 422 || !data) {
-            alert("error");
-            console.log("error")
-        }
-        else {
-            // console.log("login scss")
-        }
-
     }
 
     return (
@@ -80,17 +69,10 @@ export default function Login() {
                         <div class="form-text">We'll never share your email with anyone else.</div>
                     </div>
 
-
-
-
-
                     <div class="mb-3 mb-3 col-lg-6 col-md-6 col-12">
                         <label for="exampleInputadress" className="form-label">Password</label>
                         <input type="text" name='pass' value={inpval.pass} onChange={setdata} class="form-control" />
                     </div>
-
-
-
                     <button type="submit" onClick={addinpdata} class="btn btn-primary">Submit</button>
                 </div>
             </form>

@@ -5,7 +5,7 @@ import Navbar from './Navbar'
 
 export default function Home() {
     const [getuserdata, setUserdata] = useState([]);
-    console.log(getuserdata)
+    // console.log(getuserdata)
 
     const getdata = async (e) => {
         const res = await fetch("/getdata",
@@ -16,7 +16,7 @@ export default function Home() {
                 },
             })
         const data = await res.json();
-        console.log(data);
+        // console.log(data);
         if (res.status === 422 || !data) {
 
             console.log("error")

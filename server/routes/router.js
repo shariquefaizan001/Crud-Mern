@@ -6,14 +6,9 @@ const jwt = require("jsonwebtoken")
 const expressJwt = require("express-jwt");
 const { token } = require("morgan");
 
-// Authenticate page 
-router.post('/api', (req, res) => {
-    res.json('Welcome to the our authenticate  section ')
-  })
-
 //   register api
 
-router.post("/register", async (req, res) => {
+router.post("/register",  async (req, res) => {
     // extract data from request
     const { email, username, mobilenumber, age, adress , pass} = req.body;
     //     // console.log(req.body)
@@ -44,16 +39,15 @@ router.post("/register", async (req, res) => {
         }
 
         // genrate token
-        if (adduser !== null ) {
-            const token =jwt.sign(users,  { expiresIn: "1d" });
-            console.log(token)
+        // if (adduser !== null ) {
+            // const token =jwt.sign(users,  { expiresIn: "1d" });
+            // console.log(token)
             // return res.json({token})
-            res.status(200).json( {token : token, msg :" token genrated "} );
-        }
-        else {
-            res.status(400).json("Something went worng");
-        }
-
+            // res.status(200).json( {token : token, msg :" token genrated "} );
+        // }
+        // else {
+            // res.status(400).json("Something went worng");
+        // }
     }
     catch (error) {
         res.status(404).send(error)
@@ -62,45 +56,81 @@ router.post("/register", async (req, res) => {
     //     // console.log(req.body);
 })
 
-// login user
+// login 
 
 router.post("/login", async (req, res) => {
-    // extract data from request
-    const { email,  pass} = req.body;
-    //     // console.log(req.body)
     
+    const { email,  pass} = req.body;
 
-    // validate request
-    if (!email || !pass ) {
-        return res.status(404).json("Please fill your login Details ");
-    }
-
-    // if request is valid
-    try {
-        // check if the user already exists
         const preuser = await users.findOne({ email: email });
         const preuserpassword = await users.findOne({ pass:pass });
-        console.log(preuser);
-        console.log(preuserpassword);
+        //console.log(preuser);
+        // console.log(preuserpassword);
 
         if (preuser  && preuserpassword) {
-             res.status(200).json( {status:true, msg :"  Data matcghed login...."} );
-            // const token=  jwt.sign({ users }, { expiresIn: '1d' });
-            // console.log(token)
-            // return res.json(token)
-            // (err, token) => {res.json({token})})
-            // res.status(200).json( {status:, msg :"  Data matcghed login...."} );
-        } else {
-            res.status(404).json("login.... deny");
-       
-        }
-        
-    }
-    catch (error) {
-        res.status(404).send(error)
-    }
+            //  res.status(200).json();
+            
+    
+            const accessToken = jwt.sign({ data: preuser},"jwt_secret_password")
+            jwt.verify(accessToken, 'jwt_secret_password', (err, authData) => {
+                console.log("jwt.verify")
+                if (err) {
+                  console.log(err)
+                  res.sendStatus('403')
+                } else {
+                  res.json({
+                    message: "post created",
+                    authData
+                  });
+                }
+              });
+            
 
+            }else {
+                     res.status(404).json( " login unsuccessful")
+            }
 })
+
+
+// verify token 
+
+function verifyToken(req, res, next) {
+    // get auth header  value 
+    const bearerHeader = req.body.headers['authorization'];
+    if (typeof bearerHeader !== 'undefined') {
+  
+      // split at the space 
+      const bearer = bearerHeader.split(' ');
+      // get token from array
+      const bearerToken = bearer[1];
+      // set the token 
+      req.token = bearerToken;
+      console.log("req.token", req.token)
+      // next 
+      next();
+    } else {
+      res.sendStatus(403);
+    }
+  }
+
+
+//   Authenticate pages
+router.post('/apitest',verifyToken,(req, res) => {
+    jwt.verify(accessToken, 'secrjwt_secret_password', (err, authData) => {
+        console.log("jwt.verify")
+        if (err) {
+          console.log(err)
+          res.sendStatus('403')
+        } else {
+          res.json({
+            message: "post created",
+            authData
+          });
+        }
+      });
+    res.json('Welcome to the our authenticate  section ')
+  })
+
 
 // getdata routes
 
@@ -158,25 +188,6 @@ router.delete("/deleteuser/:id", async (req, res) => {
     }
 })
 
-
-// my api 
-
-// router.post('/myapi', (req, res) => {
-
-//     const user = {
-//       id: 1,
-//       username: "brad",
-//       email: "brad@gmail.com"
-  
-//     }
-  
-//     jwt.sign({ user }, 'secretkey', { expiresIn: '500s' }, (err, token) => {
-//       res.json({
-//         token
-//       })
-//     })
-  
-//   })
 
 module.exports = router;
 

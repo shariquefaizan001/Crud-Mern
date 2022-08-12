@@ -68,13 +68,12 @@ export default function Register() {
             })  
             
             
-                if (res.status === 201 && res.status ===  200) {
+                if (res.status === 201) {
                     navigate("/")
                     alert(" Register success.....  Now login")
-                    console.log("token")
-                } else {
-                    alert("Registration failed try again ")
+                    // console.log("token")
                 }
+              
 
         const data = await res.json();
         console.log(data);
