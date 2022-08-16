@@ -49,9 +49,9 @@ export default function Login() {
 
 
 
-        localStorage.setItem('token', JSON.stringify(token));
         
         if (res.status === 200) {
+            localStorage.setItem('token', JSON.stringify(token));
             navigate("/home")
             alert(" Login success.....  Welcome to our App")
             console.log("login")

@@ -5,7 +5,7 @@ import Login from "./Components/Login";
 import Register from "./Components/Register";
 import Details from "./Components/Details";
 import './App.css';
-import Pro from "./Components/Pro";
+
 import Protected from "./Components/Protected";
 import Edit from "./Components/Edit";
 // import Navbar from "./Components/Navbar";
@@ -25,7 +25,6 @@ function App() {
           <Route path='/home' element={<Protected Component={Home} />} />
           <Route path='/edit/:id' element={<Edit />} />
           <Route path='/view/:id' element={<Details />} />
-          <Route path='/pro'     element={<Protected Component={Pro} />} />
         
       
 

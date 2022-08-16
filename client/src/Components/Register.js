@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 // import { NavLink } from 'react-router-dom'
-import Navbar from './Navbar'
+// import Navbar from './Navbar'
+
 // import { NavLink } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
-
+import Registernavbar from './Registernavbar';
 export default function Register() {
 
     const navigate = useNavigate();
@@ -84,8 +85,9 @@ export default function Register() {
     return (
 
         <div className='container'>
-            <Navbar />
-            {/* <NavLink to="/"> Home</NavLink> */}
+        
+            <Registernavbar/>
+        
             <form >
                 <div className='row'>
 

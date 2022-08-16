@@ -37,17 +37,6 @@ router.post("/register",  async (req, res) => {
             // res.status(201).json(adduser ,{status:true, msg :"  Data matcghed login...."} );
             console.log(adduser)
         }
-
-        // genrate token
-        // if (adduser !== null ) {
-            // const token =jwt.sign(users,  { expiresIn: "1d" });
-            // console.log(token)
-            // return res.json({token})
-            // res.status(200).json( {token : token, msg :" token genrated "} );
-        // }
-        // else {
-            // res.status(400).json("Something went worng");
-        // }
     }
     catch (error) {
         res.status(404).send(error)
@@ -69,8 +58,6 @@ router.post("/login", async (req, res) => {
 
         if (preuser  && preuserpassword) {
             //  res.status(200).json();
-
-            
             const accessToken = jwt.sign({ data: preuser},"jwt_secret_password" )
             jwt.verify(accessToken, 'jwt_secret_password', (err, authData) => {
                 // const result={accessToken,authData}
