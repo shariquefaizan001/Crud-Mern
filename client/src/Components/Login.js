@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 // import { NavLink } from 'react-router-dom'
 import LoginNavbar from './LoginNavbar'
 import { useNavigate } from 'react-router-dom'
+
+
 export default function Login() {
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
     const [inpval, setINP] = useState({
         email: "",
         pass: "",
@@ -17,13 +19,14 @@ export default function Login() {
         console.log(e.target.value)
 
         const { name, value } = e.target;
-        // console.log("setting", name, "to", value)
+
         setINP((preval) => {
             return {
                 ...preval, [name]: value
             }
         })
     }
+
     const addinpdata = async (e) => {
         e.preventDefault();
         const { email,
@@ -41,17 +44,21 @@ export default function Login() {
             })
 
 
-            const token = await res.json();
-            console.log(token);
+        const token = await res.json();
+        console.log(token);
 
-        if (res.status === 200 ) {
+
+
+        localStorage.setItem('token', JSON.stringify(token));
+        
+        if (res.status === 200) {
             navigate("/home")
             alert(" Login success.....  Welcome to our App")
             console.log("login")
             console.log(token)
         } else {
             alert("Login fail  please enter registred email-id and password")
-         
+
         }
     }
 

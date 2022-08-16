@@ -69,18 +69,22 @@ router.post("/login", async (req, res) => {
 
         if (preuser  && preuserpassword) {
             //  res.status(200).json();
+
             
-    
-            const accessToken = jwt.sign({ data: preuser},"jwt_secret_password")
+            const accessToken = jwt.sign({ data: preuser},"jwt_secret_password" )
             jwt.verify(accessToken, 'jwt_secret_password', (err, authData) => {
-                console.log("jwt.verify")
+                // const result={accessToken,authData}
+                console.log("jwt.verify");
+                console.log(accessToken);
+
                 if (err) {
                   console.log(err)
                   res.sendStatus('403')
                 } else {
                   res.json({
-                    message: "post created",
-                    authData
+                    // message: "post created",
+                    // result
+                    accessToken
                   });
                 }
               });
@@ -185,6 +189,29 @@ router.delete("/deleteuser/:id", async (req, res) => {
         res.status(201).json(deleteduser)
     } catch (error) {
         res.status(422).json(error)
+    }
+})
+
+
+
+// search data
+
+router.get("/search/:key", async (req, res) => {
+    try {
+        const userdata = await users.find(
+
+            {
+                "$or":[
+                    {"username":{$in:req.params.key}}
+                ]
+            }
+        );
+
+        console.log(userdata)
+        res.send(userdata)
+     
+    } catch (error) {
+        res.status(422).send(error)
     }
 })
 

@@ -6,8 +6,9 @@ import Register from "./Components/Register";
 import Details from "./Components/Details";
 import './App.css';
 import Edit from "./Components/Edit";
-import Navbar from "./Components/Navbar";
+// import Navbar from "./Components/Navbar";
 import {BrowserRouter,Route,Routes} from "react-router-dom"
+// import Homeopagenavbar from "./Components/Homepagenavbar";
  
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
           <Route path='/home' element={<Home/>} />
           <Route path='/edit/:id' element={<Edit/>} />
           <Route path='/view/:id' element={<Details/>} />
+
+
           {/* <Route path='/Thirdpage'   element={<Pages/>} />/ */}
           {/* <Route path='/Fourthpage' element={<Fourthpage/>} />/ */}
           

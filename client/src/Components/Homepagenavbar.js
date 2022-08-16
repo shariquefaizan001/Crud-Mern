@@ -1,9 +1,19 @@
 import React from 'react'
 import '../Components/Common.css'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate} from 'react-router-dom';
+import { useState } from 'react';
 
 
-export default function Navbar() {
+export default function Homeopagenavbar() {
+
+
+    const navigate = useNavigate();
+    const logoutusers = () => {
+        localStorage.removeItem('token');
+        navigate("/")
+        alert(" Logout to our App")
+    };
+
 
     return (
         <>
@@ -16,19 +26,18 @@ export default function Navbar() {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <NavLink className="left" to="/register">Register Users</NavLink>
-                                <NavLink className="left" to="/">Login</NavLink>
+
+<h3>List of all users</h3>
+
                             </li>
                         </ul>
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
                             </li>
                         </ul>
-                        <form className="d-flex" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                            <button className="btn btn-outline-success" type="submit">Search</button>
-                        </form>
+                        
                     </div>
+                                <button className="btn btn-outline-danger" onClick={logoutusers} type="submit"> logout</button>
                 </div>
             </nav>
 

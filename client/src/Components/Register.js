@@ -5,12 +5,8 @@ import Navbar from './Navbar'
 import { useNavigate } from 'react-router-dom'
 
 
-
-
-
-
 export default function Register() {
-    
+
     const navigate = useNavigate();
 
     const [inpval, setINP] = useState({
@@ -38,9 +34,6 @@ export default function Register() {
     }
 
 
-   
-    
-    
     const addinpdata = async (e) => {
         e.preventDefault();
         const { email,
@@ -50,8 +43,8 @@ export default function Register() {
             adress,
             pass, } = inpval;
 
-            
-            const res = await fetch("/register",
+
+        const res = await fetch("/register",
             {
                 method: "POST",
                 headers: {
@@ -65,15 +58,14 @@ export default function Register() {
                     adress,
                     pass,
                 })
-            })  
-            
-            
-                if (res.status === 201) {
-                    navigate("/")
-                    alert(" Register success.....  Now login")
-                    // console.log("token")
-                }
-              
+            })
+
+
+        if (res.status === 201) {
+            navigate("/")
+            alert(" Register success.....  Now login")
+            // console.log("token")
+        }
 
         const data = await res.json();
         console.log(data);
@@ -82,10 +74,8 @@ export default function Register() {
             console.log("error")
         }
         else {
-            // alert("data submited");
-            // console.log("data submited")
-        }
 
+        }
 
     }
 
