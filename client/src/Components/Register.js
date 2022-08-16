@@ -65,6 +65,8 @@ export default function Register() {
             navigate("/")
             alert(" Register success.....  Now login")
             // console.log("token")
+        }else{
+            alert("Already registered / Fill the the data ")
         }
 
         const data = await res.json();

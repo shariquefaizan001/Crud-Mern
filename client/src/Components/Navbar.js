@@ -18,6 +18,7 @@ export default function Navbar() {
                             <li className="nav-item">
                                 <NavLink className="left" to="/register">Register Users</NavLink>
                                 <NavLink className="left" to="/">Login</NavLink>
+                                <NavLink  className= "left" to="/home">Home</NavLink>
                             </li>
                         </ul>
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">

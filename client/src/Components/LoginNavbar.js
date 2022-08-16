@@ -16,15 +16,16 @@ export default function LoginNavbar() {
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
                  
-                            <a className="navbar-brand" href="#"> Login to see HOMEPAGE</a>
+                            {/* <a className="navbar-brand" href="#"> Login to see HOMEPAGE</a> */}
                             <NavLink  className= "left" to="/register">Register Users</NavLink>
+                            <NavLink  className= "left" to="/home">Home</NavLink>
 
                             </li>
                         </ul>
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
                     <h1>
-                        Please login IF you Already Registred 
+                      LOGIN 
                     </h1>
                
 
