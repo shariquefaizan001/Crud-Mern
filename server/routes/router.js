@@ -5,13 +5,14 @@ const users = require("../models/userSchema");
 const jwt = require("jsonwebtoken")
 const expressJwt = require("express-jwt");
 const { token } = require("morgan");
+const bcrypt = require ('bcryptjs')
 
 //   register api
 
 router.post("/register",  async (req, res) => {
     // extract data from request
     const { email, username, mobilenumber, age, adress , pass} = req.body;
-    //     // console.log(req.body)
+    console.log(req.body)
 
     // validate request
     if (!email || !username || !mobilenumber || !age || !adress || !pass ) {
@@ -23,7 +24,7 @@ router.post("/register",  async (req, res) => {
     try {
         // check if the user already exists
         const preuser = await users.findOne({ email: email });
-        console.log(preuser);
+        //console.log(preuser);
 
         if (preuser) {
              res.status(404).json(" Already Registered");
@@ -35,7 +36,7 @@ router.post("/register",  async (req, res) => {
             await adduser.save();
             res.status(201).json(adduser);
             // res.status(201).json(adduser ,{status:true, msg :"  Data matcghed login...."} );
-            console.log(adduser)
+            //console.log(adduser)
         }
     }
     catch (error) {
@@ -52,7 +53,9 @@ router.post("/login", async (req, res) => {
     const { email,  pass} = req.body;
 
         const preuser = await users.findOne({ email: email });
-        const preuserpassword = await users.findOne({ pass:pass });
+        const preuserpassword=await bcrypt.compare(pass,preuser.pass);
+        // const preuserpassword = await users.findOne({ pass:pass });
+        // const preuserpassword=await bcrypt.compare(pass,preuser.pass);
         //console.log(preuser);
         // console.log(preuserpassword);
 

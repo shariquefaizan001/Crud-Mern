@@ -1,4 +1,6 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const bcrypt = require('bcryptjs');
+
 
 const userSchema = new mongoose.Schema({
     email: {
@@ -30,6 +32,27 @@ const userSchema = new mongoose.Schema({
     }
 
 })
+
+
+// hashing  password 
+
+userSchema.pre('save', async function(next){
+    console.log('flkdsjfl')
+    if(this.isModified('pass')){
+
+        this.pass = await bcrypt.hash(this.pass,12);
+        console.log("hello ")
+    }
+    next();
+})
+
+
+
+
+
+
+
+
 
 const users= new mongoose.model("users", userSchema);
 module.exports =users;

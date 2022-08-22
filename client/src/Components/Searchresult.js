@@ -93,4 +93,4 @@ export default function Searchresult() {
             </div>
         </div>
     )
-}
+// }

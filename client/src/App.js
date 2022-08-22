@@ -5,12 +5,10 @@ import Login from "./Components/Login";
 import Register from "./Components/Register";
 import Details from "./Components/Details";
 import './App.css';
-
 import Protected from "./Components/Protected";
 import Edit from "./Components/Edit";
-// import Navbar from "./Components/Navbar";
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-// import Homeopagenavbar from "./Components/Homepagenavbar";
+
 
 function App() {
   return (
@@ -20,21 +18,13 @@ function App() {
         <Routes>
 
           <Route path='/' element={<Login />} />
-          {/* <Route path='/register' element={<Register />} /> */}
           <Route path='/register' element={<Register />} />
           <Route path='/home' element={<Protected Component={Home} />} />
           <Route path='/edit/:id' element={<Edit />} />
           <Route path='/view/:id' element={<Details />} />
-        
-      
-
         </Routes>
 
       </BrowserRouter>
-
-      {/* <Navbar/> */}
-      {/* <Home/>
- <Register/> */}
     </>
   );
 }

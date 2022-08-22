@@ -199,34 +199,35 @@ export default function Home() {
 
     }
 
+    // search handle 
 
-    const searchHandle=async (event)=>{
-    
-        let key=event.target.value;
+    const searchHandle = async (event) => {
+
+        let key = event.target.value;
         console.log(key)
-    
-        if(key){
-        let res2=await fetch(`/search/${key}`);  
-        res2 = await res2.json();
-       console.log(res2);
-       if (res2) {
-    
-        setUserdata(res2)
-       } else {
-                   console.log("hol")
-                  getdata();
-       }
-    }
+
+        if (key) {
+            let res2 = await fetch(`/search/${key}`);
+            res2 = await res2.json();
+            console.log(res2);
+            if (res2) {
+
+                setUserdata(res2)
+            } else {
+                console.log("hol")
+                getdata();
+            }
+        }
     }
 
     return (
         <div className='mt-5'>
             <Homeopagenavbar />
             <div className='container'>
-            <form className="d-flex" role="search">
-                            <input className="form-control me-2" type="search" onChange={searchHandle} placeholder="Search" aria-label="Search" />
-                            <button className="btn btn-outline-success" type="submit">Search</button>
-                        </form>
+                <form className="d-flex" role="search">
+                    <input className="form-control me-2" type="search" onChange={searchHandle} placeholder="Search" aria-label="Search" />
+                    <button className="btn btn-outline-success" type="submit">Search</button>
+                </form>
                 <div className='add_btn mt-2'>
                 </div>
                 <table className="table">

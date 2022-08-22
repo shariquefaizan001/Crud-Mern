@@ -1,25 +1,17 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-// import CreateIcon from "@mui/icons-material/Create"
-// import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline"
 import Navbar from './Navbar'
 import Card from '@mui/material/Card';
-// import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import { useParams } from 'react-router-dom';
 import { NavLink } from 'react-router-dom'
 
 
 export default function Details() {
+
     const [getuserdata, setUserdata] = useState([]);
-    // console.log(getuserdata);
 
     const { id } = useParams("");
-    // console.log(id)
-
-    // let navigate = useNavigate();
-
-    // navigate('/');
 
     const getdata = async () => {
         const res = await fetch(`/getuser/${id}`,
@@ -37,7 +29,7 @@ export default function Details() {
         }
         else {
             setUserdata(data)
-            // console.log(" Getdata")
+
         }
     }
     useEffect(() => {
@@ -54,6 +46,7 @@ export default function Details() {
                 "content-type": "application/json"
             }
         });
+        
         const deletedata = await res2.json();
         console.log(deletedata);
         if (res2.status === 422 || !deletedata) {
@@ -61,8 +54,7 @@ export default function Details() {
         } else {
             console.log("user deleted")
             alert("user deleted")
-            // getdata();
-            // navigate.push("/")
+
         }
     }
 
@@ -77,9 +69,6 @@ export default function Details() {
 
                     <div className='add_btn'>
 
-
-                        {/* <NavLink to={`/edit/${element._id}`}>  <button class="btn btn-success">Edit</button>   </NavLink> */}
-                        {/* <button class="btn btn-danger"> Delete</button> */}
                         <NavLink to={`/view/${id}`}>  <button class="btn btn-success"> Read</button>   </NavLink>
                         <NavLink to={`/edit/${id}`}>  <button class="btn btn-primary">Update</button>   </NavLink>
                         <button onClick={() => deleteuser(id)} class="btn btn-danger"> Delete</button>

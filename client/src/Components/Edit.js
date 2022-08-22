@@ -7,10 +7,6 @@ import { useParams } from 'react-router-dom';
 
 export default function Edit() {
 
-    // const [getuserdata, setUserdata] = useState([]);
-    // console.log(getuserdata);
-
-    // const history= useNavigate();
 
     const [inpval, setINP] = useState({
         email: "",
@@ -18,7 +14,7 @@ export default function Edit() {
         mobilenumber: "",
         age: "",
         adress: "",
-    pass:""
+        pass: ""
     })
     console.log(inpval)
 
@@ -60,8 +56,8 @@ export default function Edit() {
     }
     useEffect(() => {
         getdata();
-    // },[])
-},[])
+        // },[])
+    }, [])
 
     const updateuser = async (e) => {
         e.preventDefault();
@@ -71,7 +67,7 @@ export default function Edit() {
             username,
             mobilenumber,
             age,
-            adress,pass } = inpval
+            adress, pass } = inpval
 
         const res2 = await fetch(`/updateuser/${id}`, {
             method: "PATCH",
@@ -83,7 +79,7 @@ export default function Edit() {
                 username,
                 mobilenumber,
                 age,
-                adress,pass
+                adress, pass
             }),
         })
         const data2 = await res2.json();
@@ -95,8 +91,6 @@ export default function Edit() {
             // history.push("/")
         }
     }
-
-
 
     return (
 
@@ -134,17 +128,12 @@ export default function Edit() {
                         <label for="exampleInputadress" className="form-label">Adress</label>
                         <input type="text" name='adress' value={inpval.adress} onChange={setdata} class="form-control" />
                     </div>
-                    
+
                     <div class="mb-3 mb-3 col-lg-6 col-md-6 col-12">
                         <label for="exampleInputadress" className="form-label">Password</label>
                         <input type="password" name='pass' value={inpval.pass} onChange={setdata} class="form-control" />
                     </div>
 
-
-                    {/* <div class="mb-3 mb-3 col-lg-6 col-md-6 col-12">
-                <label for="exampleInputpassword" className="form-label">Password</label>
-                <input type="password" name='password' value={inpval.password} onChange={setdata} class="form-control" />
-            </div> */}
                     <button type="submit" onClick={updateuser} class="btn btn-primary">Submit</button>
                 </div>
             </form>
