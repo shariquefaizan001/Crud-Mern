@@ -7,7 +7,10 @@ const expressJwt = require("express-jwt");
 const { token } = require("morgan");
 const bcrypt = require ('bcryptjs')
 
-//   register api
+
+
+//  changes
+//   register api 
 
 router.post("/register",  async (req, res) => {
     // extract data from request
