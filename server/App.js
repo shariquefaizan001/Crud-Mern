@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require('express')
 const app = express()
 const mongoose = require("mongoose")
-const port = 8003
+const port = 8010
 const cors = require("cors")
 // const db = 'mongodb+srv://sharique:easypass@cluster0.ocn3r.mongodb.net/?retryWrites=true&w=majority'
 const users = require('./models/userSchema')

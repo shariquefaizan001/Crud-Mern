@@ -42,8 +42,6 @@ router.post("/register",  async (req, res) => {
     catch (error) {
         res.status(404).send(error)
     }
-
-    //     // console.log(req.body);
 })
 
 // login 
@@ -52,13 +50,16 @@ router.post("/login", async (req, res) => {
     
     const { email,  pass} = req.body;
 
+try{
+if(!email || !pass ){
+    // console.log("please fill the data");
+    res.status(404).json(" Please fill  all the data")
+
+}
+    else{
         const preuser = await users.findOne({ email: email });
         const preuserpassword=await bcrypt.compare(pass,preuser.pass);
-        // const preuserpassword = await users.findOne({ pass:pass });
-        // const preuserpassword=await bcrypt.compare(pass,preuser.pass);
-        //console.log(preuser);
-        // console.log(preuserpassword);
-
+      
         if (preuser  && preuserpassword) {
             //  res.status(200).json();
             const accessToken = jwt.sign({ data: preuser},"jwt_secret_password" )
@@ -66,24 +67,25 @@ router.post("/login", async (req, res) => {
                 // const result={accessToken,authData}
                 console.log("jwt.verify");
                 console.log(accessToken);
-
-                if (err) {
-                  console.log(err)
-                  res.sendStatus('403')
-                } else {
-                  res.json({
-                    // message: "post created",
-                    // result
+                res.json({
                     accessToken
                   });
-                }
               });
             
 
-            }else {
-                     res.status(404).json( " login unsuccessful")
             }
+            else {
+                     res.status(404).json( " login unsuccessful")
+                     console.log("Invalid user")
+            }
+        }
+        }catch(error){
+    console.log("error")
+    res.status(404).json("")
+}
+
 })
+
 
 
 // verify token 
