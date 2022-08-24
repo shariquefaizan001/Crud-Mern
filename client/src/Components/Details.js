@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import Navbar from './Navbar'
+import Detailsnavbar from './Detailsnavbar'
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { useParams } from 'react-router-dom';
@@ -61,7 +61,7 @@ export default function Details() {
     return (
 
         <div className='container mt-3'>
-            <Navbar />
+            <Detailsnavbar />
             <h3 style={{ fontWeigth: 350 }}> Welcome  {getuserdata.username} To our crud opration  </h3>
 
             <Card sx={{ minWidth: 275 }}>
@@ -69,7 +69,7 @@ export default function Details() {
 
                     <div className='add_btn'>
 
-                        <NavLink to={`/view/${id}`}>  <button class="btn btn-success"> Read</button>   </NavLink>
+                        {/* <NavLink to={`/view/${id}`}>  <button class="btn btn-success"> Read</button>   </NavLink> */}
                         <NavLink to={`/edit/${id}`}>  <button class="btn btn-primary">Update</button>   </NavLink>
                         <button onClick={() => deleteuser(id)} class="btn btn-danger"> Delete</button>
 

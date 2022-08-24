@@ -161,6 +161,14 @@ router.get("/getuser/:id", async (req, res) => {
 
 // update user data
 router.patch("/updateuser/:id", async (req, res) => {
+
+
+    const { email, username, mobilenumber, age, adress , pass} = req.body;
+       if (!email || !username || !mobilenumber || !age || !adress || !pass ) {
+        //     // if (email || username || mobilenumber || age || adress)
+        return res.status(404).json(" Please fill  all the data");
+    }
+
     try {
         console.log(req.params)
         const { id } = (req.params);

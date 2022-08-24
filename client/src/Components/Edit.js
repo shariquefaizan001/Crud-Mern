@@ -2,15 +2,16 @@
 import React, { useEffect, useState } from 'react'
 // import { NavLink } from 'react-router-dom'
 import Navbar from './Navbar'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import Detailsnavbar from './Detailsnavbar';
 // import { useNavigate } from "react-router-dom";
 
 
-// edit ed
+// edited
 
 export default function Edit() {
 
-
+const navigate = useNavigate();
     const [inpval, setINP] = useState({
         email: "",
         username: "",
@@ -85,20 +86,27 @@ export default function Edit() {
                 adress, pass
             }),
         })
+
+
+
         const data2 = await res2.json();
         console.log(data2)
-        if (res2.status === !data2) {
+
+
+        if (res2.status === 404 || !data2) {
             alert("fill the data")
+            console.log("fill the dataa")
         } else {
             alert("Data added")
             // history.push("/")
+            navigate(`/view/${id}`)
         }
     }
 
     return (
 
         <div className='container'>
-            <Navbar />
+            <Detailsnavbar />
             {/* <NavLink to="/"> home 222 /// Edit</NavLink> */}
 
             <form onSubmit={setdata}>
